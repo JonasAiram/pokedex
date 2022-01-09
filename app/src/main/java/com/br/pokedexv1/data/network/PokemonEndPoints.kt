@@ -1,6 +1,7 @@
 package com.br.pokedexv1.data.network
 
 import com.br.pokedexv1.data.model.PokemonResponse
+import com.br.pokedexv1.data.model.PokemonsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -9,7 +10,7 @@ interface PokemonEndPoints {
 
     //    @TODO Implementar os limites pegando do usecase
     @GET("pokemon/?limit=100")
-    suspend fun listarPokemons(): Response<PokemonResponse>
+    suspend fun listarPokemons(): Response<PokemonsResponse>
 
     // @TODO Implementart para pegar ID
     @GET("pokemon/{id}")

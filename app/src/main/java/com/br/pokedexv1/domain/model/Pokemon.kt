@@ -2,10 +2,10 @@ package com.br.pokedexv1.domain.model
 
 //@Entity(tableName = "pokemons")
 data class Pokemon(
-    var id: Int?,
     var name: String,
     var url: String,
-    val types: List<PokemonType>
+    var id: Int? = null,
+    val types: List<PokemonType>? = null
 )  {
     fun getImageUrl(): String {
         val index = url.split("/".toRegex()).dropLast(1).last()
