@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_detalhes"
-        android:name="com.br.pokedexv1.presentation.ui.notifications.NotificationsFragment"
+        android:name="com.br.pokedexv1.presentation.ui.home.DetalhesFragment"
         android:label="Detalhes"
         tools:layout="@layout/detalhes_pokemon" >
         <argument

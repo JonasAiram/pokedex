@@ -12,7 +12,6 @@ interface PokemonEndPoints {
     @GET("pokemon/?limit=100")
     suspend fun listarPokemons(): Response<PokemonsResponse>
 
-    // @TODO Implementart para pegar ID
     @GET("pokemon/{id}")
     suspend fun obterDetalhesDoPokemon(@Path("id") id: Int): Response<PokemonResponse>
 

@@ -1,7 +1,5 @@
 package com.br.pokedexv1.presentation.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.pokedexv1.commons.RequestState
@@ -18,7 +16,7 @@ class HomeViewModel(
     val liveDataListarPokemons get() = _liveDataListarPokemons.asSharedFlow()
 
     private val _liveDataObterDetalhesPokemon = MutableSharedFlow<RequestState<List<Pokemon>>>()
-    val liveDataObterDetalhesPokemon get() = _liveDataListarPokemons.asSharedFlow()
+    val liveDataObterDetalhesPokemon get() = _liveDataObterDetalhesPokemon.asSharedFlow()
 
     fun listarPokemons() = viewModelScope.launch {
         pokemonUseCase.listarPokemons()
@@ -28,20 +26,20 @@ class HomeViewModel(
                 _liveDataListarPokemons.emit(RequestState.Error(it))
             }
             .collect {
-                _liveDataListarPokemons.emit(RequestState.Success<Pokemon>(it))
+                _liveDataListarPokemons.emit(RequestState.Success(it))
             }
     }
 
-//    fun obterDetalhesPokemon(id: Int) = viewModelScope.launch {
-//        pokemonUseCase.obterDetalhes(id)
-//            .onStart {  }
-//            .onCompletion {  }
-//            .catch {
-//                _liveDataObterDetalhesPokemon.emit(RequestState.Error(it))
-//            }
-//            .collect {
-//                _liveDataObterDetalhesPokemon.emit(RequestState.Success<Pokemon>(it))
-//            }
-//    }
+    fun obterDetalhesPokemon(id: Int) = viewModelScope.launch {
+        pokemonUseCase.obterDetalhes(id)
+            .onStart {  }
+            .onCompletion {  }
+            .catch {
+                _liveDataObterDetalhesPokemon.emit(RequestState.Error(it))
+            }
+            .collect {
+                _liveDataObterDetalhesPokemon.emit(RequestState.Success(it))
+            }
+    }
 
 }
