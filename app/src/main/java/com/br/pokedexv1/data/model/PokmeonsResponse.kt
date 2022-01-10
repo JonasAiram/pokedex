@@ -6,15 +6,12 @@ import com.br.pokedexv1.domain.model.PokemonType
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Keep
-@Parcelize
 class PokemonsResponse(
     val count: Int,
     val next: String?,
     val previous: String?,
-    @SerializedName("results")
     var results: List<PokemonResult>
-): Parcelable
+)
 
 data class PokemonResult(
     val name: String,

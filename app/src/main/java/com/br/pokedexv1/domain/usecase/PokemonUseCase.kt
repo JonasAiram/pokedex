@@ -1,30 +1,40 @@
 package com.br.pokedexv1.domain.usecase
 
-import com.br.pokedexv1.commons.InvalidNetworking
-import com.br.pokedexv1.commons.PokemonInvalidException
+import com.br.pokedexv1.data.model.PokemonResponse
 import com.br.pokedexv1.data.model.PokemonsResponse
 import com.br.pokedexv1.data.repository.PokemonRepositoryImplements
 import com.br.pokedexv1.domain.model.Pokemon
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
 class PokemonUseCase(private val pokemonRepositoryImplements: PokemonRepositoryImplements) {
 
-    suspend fun listarPokemons(): Flow<Pokemon> = flow {
+    suspend fun listarPokemons() = flow {
         val dadosPokemons = pokemonRepositoryImplements.listarPokemons()
-        dadosPokemons.collect { emit(pokemonResponseToPokemon(it)) }
+        dadosPokemons.collect { emit(pokemonsResponseToPokemon(it)) }
     }
 
-    private fun pokemonResponseToPokemon(pokemonsResponse: PokemonsResponse?): Pokemon {
+    suspend fun pokemonsResponseToPokemon(pokemonsResponse: PokemonsResponse?): List<Pokemon> {
+        val list: MutableList<Pokemon> = ArrayList()
         pokemonsResponse?.results?.map { pokemonsResult ->
-                val pokemon = Pokemon(
-                    pokemonsResult.name,
-                    pokemonsResult.url
-                )
-                return pokemon
+
+            val id = Integer.parseInt(pokemonsResult.url.split("/".toRegex()).dropLast(1).last())
+            val detalhesPokemon = pokemonRepositoryImplements.obterDetalhesPokemon(id)
+
+            detalhesPokemon.collect { pokemonResponse ->
+                pokemonResponse?.let {
+                    val pokemon = Pokemon(
+                        pokemonResponse.name,
+                        pokemonsResult.url,
+                        pokemonResponse.id,
+                        pokemonResponse.types.map { type -> type.type }
+                    )
+                list.add(pokemon)
+                }
             }
-        throw PokemonInvalidException()
+        }
+        val listPokemon: List<Pokemon> = list
+        return listPokemon
     }
 
 }
