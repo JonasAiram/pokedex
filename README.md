@@ -11,3 +11,4 @@
 
 
 
+![alt text](https://github.com/JonasAiram/pokedex/blob/master/1.gif)
