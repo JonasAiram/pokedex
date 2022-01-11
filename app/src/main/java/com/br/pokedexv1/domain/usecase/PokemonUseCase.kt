@@ -4,9 +4,9 @@ import com.br.pokedexv1.data.model.PokemonResponse
 import com.br.pokedexv1.data.model.PokemonsResponse
 import com.br.pokedexv1.data.repository.PokemonRepositoryImplements
 import com.br.pokedexv1.domain.model.Pokemon
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 class PokemonUseCase(private val pokemonRepositoryImplements: PokemonRepositoryImplements) {
 
@@ -18,6 +18,14 @@ class PokemonUseCase(private val pokemonRepositoryImplements: PokemonRepositoryI
     suspend fun obterDetalhes(id: Int) = flow {
         val dadosPokemons = pokemonRepositoryImplements.obterDetalhesPokemon(id)
         dadosPokemons.collect { emit(pokemonResponseToPokemon(it)) }
+    }
+
+    suspend fun obterListaPokemonsFavoritos() : Flow<List<Pokemon>> {
+        return pokemonRepositoryImplements.obterListaPokemonsFavoritos()
+    }
+
+    suspend fun favoritarPokemonInfo(pokemonModel: Pokemon) {
+        return pokemonRepositoryImplements.favoritarPokemon(pokemonModel)
     }
 
 
@@ -44,9 +52,7 @@ class PokemonUseCase(private val pokemonRepositoryImplements: PokemonRepositoryI
                 pokemonResponse.name,
                 "",
                 pokemonResponse.id,
-                pokemonResponse.types.map {
-                    it.type
-                }
+                pokemonResponse.types.joinToString(",")
             )
             list.add(pokemon)
         }

@@ -3,10 +3,7 @@ package com.br.pokedexv1
 import android.app.Application
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.br.pokedexv1.data.di.networkPokemon
-import com.br.pokedexv1.data.di.repositoryModulePokemon
-import com.br.pokedexv1.data.di.useCaseModulePokemon
-import com.br.pokedexv1.data.di.viewModelModuleMain
+import com.br.pokedexv1.data.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -22,7 +19,9 @@ class ApplicationPokemon : Application(), LifecycleObserver {
                     repositoryModulePokemon,
                     useCaseModulePokemon,
                     networkPokemon,
-                    viewModelModuleMain
+                    viewModelModuleMain,
+                    pokemonModuleDAO,
+                    viewModelModuleFavorito
 
                 )
             )
