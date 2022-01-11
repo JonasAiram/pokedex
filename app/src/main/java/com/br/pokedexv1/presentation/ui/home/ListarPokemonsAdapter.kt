@@ -33,7 +33,7 @@ class ListarPokemonsAdapter(var clickCardView: ClickPokemon) : ListAdapter<Pokem
             }
 
             Glide.with(binding.root.context)
-                .load(item.getImageUrl()).into(binding.ivFoto)
+                .load(item.url).into(binding.ivFoto)
 
         }
     }

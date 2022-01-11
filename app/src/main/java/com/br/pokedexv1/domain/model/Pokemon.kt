@@ -11,7 +11,7 @@ data class Pokemon(
     @PrimaryKey
     var name: String,
     var url: String,
-    var id: Int? = null,
+    var id: Int,
     val types: String = "",
 //    val types: List<PokemonType>? = null,
     var favorite: Boolean = false

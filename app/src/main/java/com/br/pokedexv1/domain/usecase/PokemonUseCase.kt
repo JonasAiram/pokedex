@@ -37,8 +37,10 @@ class PokemonUseCase(private val pokemonRepositoryImplements: PokemonRepositoryI
 
             val pokemon = Pokemon(
                 pokemonsResult.name,
-                pokemonsResult.url
+                pokemonsResult.url,
+                id
             )
+            pokemon.url = pokemon.getImageUrl()
             list.add(pokemon)
         }
         val listPokemon: List<Pokemon> = list

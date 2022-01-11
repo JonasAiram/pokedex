@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.br.pokedexv1.commons.RequestState
 import com.br.pokedexv1.databinding.ListarPokmeonFragmentBinding
 import com.br.pokedexv1.domain.model.Pokemon
-import com.br.pokedexv1.presentation.ui.home.HomeViewModel
 import com.br.pokedexv1.presentation.ui.home.ListarPokemonsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

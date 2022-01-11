@@ -109,6 +109,6 @@ class HomeFragment : Fragment(), ListarPokemonsAdapter.ClickPokemon {
 
     override fun clickPokemon(pokemon: Pokemon) {
         Toast.makeText(context,pokemon.name, Toast.LENGTH_SHORT).show()
-        homeViewModel.obterDetalhesPokemon(pokemon.getIdUrl())
+        homeViewModel.obterDetalhesPokemon(pokemon.id)
     }
 }
